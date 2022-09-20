@@ -6,7 +6,7 @@
     1. IDEA: does this mean store the possible options as {pattern1: true, pattern2: false, ...}?
 3. Initialize the wave in a completely unobserved state (all coefficients are true)
 4. Repeat:
-    1. Find a wave element with the minimal non zero entropy (the number of true coefficients). If there is no such element (all elements have 0 or undefined entropy), stop and go to step 5
+    1. Find a wave element with the minimal non-zero entropy (the number of true coefficients). If there is no such element (all elements have 0 or undefined entropy), stop and go to step 5
     2. Collapse the wave element into a definite state according to its coefficients and the distribution of NxN patterns in the input
     3. Propagate the collapse to the neighboring wave elements
 5. By now all waveforms are either in a completely observed state (only one coefficient is true) or in the contradictory state (all coefficients are false). In the former case return the output, in the latter case return an error.
