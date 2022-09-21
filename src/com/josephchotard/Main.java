@@ -13,28 +13,31 @@ public class Main {
         ElementRulesCollection.setElements(Map.of(
                 "┫", new ElementRules(
                         "┫",
-                        Stream.of("┣", "┳", "┻")
+                        0.1,
+                        Stream.of("┣", "┳", "┻", "╋")
                             .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┣", "┳")
+                        Stream.of("┫", "┣", "┳", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
                         Stream.of("┣", " ")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┣","┻")
+                        Stream.of("┫", "┣","┻", "╋")
                                 .collect(Collectors.toCollection(HashSet::new))
                 ),
                 "┣", new ElementRules(
                         "┣",
+                        0.1,
                         Stream.of("┫", " ")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┣", "┳")
+                        Stream.of("┫", "┣", "┳", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┳", "┻")
+                        Stream.of("┫", "┳", "┻", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┣","┻")
+                        Stream.of("┫", "┣","┻", "╋")
                                 .collect(Collectors.toCollection(HashSet::new))
                 ),
                 " ", new ElementRules(
                         " ",
+                        0.5,
                         Stream.of("┫", " ")
                                 .collect(Collectors.toCollection(HashSet::new)),
                         Stream.of("┻", " ")
@@ -46,24 +49,38 @@ public class Main {
                 ),
                 "┳", new ElementRules(
                         "┳",
-                        Stream.of("┻", "┳", "┣")
+                        0.1,
+                        Stream.of("┻", "┳", "┣", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
                         Stream.of("┻", " ")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┻", "┳", "┫")
+                        Stream.of("┻", "┳", "┫", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┫", "┻", "┣")
+                        Stream.of("┫", "┻", "┣", "╋")
                                 .collect(Collectors.toCollection(HashSet::new))
                 ),
                 "┻", new ElementRules(
                         "┻",
-                        Stream.of("┻", "┳", "┣")
+                        0.1,
+                        Stream.of("┻", "┳", "┣", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┳", "┣", "┫")
+                        Stream.of("┳", "┣", "┫", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
-                        Stream.of("┻", "┳", "┫")
+                        Stream.of("┻", "┳", "┫", "╋")
                                 .collect(Collectors.toCollection(HashSet::new)),
                         Stream.of(" ", "┳")
+                                .collect(Collectors.toCollection(HashSet::new))
+                ),
+                "╋", new ElementRules(
+                        "╋",
+                        0.1,
+                        Stream.of("┻", "┳", "┣", "╋")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┳", "┣", "┫", "╋")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┻", "┳", "┫", "╋")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┫", "┻", "┣", "╋")
                                 .collect(Collectors.toCollection(HashSet::new))
                 )
         ));
@@ -71,7 +88,7 @@ public class Main {
         Wave wave = new Wave(
                 45,
                 25,
-                new String[]{"┫", "┣", " ", "┳", "┻"}
+                new String[]{"┫", "┣", " ", "┳", "┻", "╋"}
         );
 
 

@@ -32,7 +32,7 @@ public class Wave {
      * @param y Y position of element to start propagation from
      */
     public void propagate(int x, int y) {
-        LinkedList<WaveElementWithPosition> queue = new LinkedList();
+        LinkedList<WaveElementWithPosition> queue = new LinkedList<>();
 
         queue.add(new WaveElementWithPosition(
                 this.waveElements[y][x],
@@ -86,13 +86,16 @@ public class Wave {
     }
 
     public Optional<WaveElementWithPosition> getLowestEntropyElement() {
-        ArrayList<WaveElementWithPosition> lowestEntropyElements = new ArrayList();
-        int minEntropy = Integer.MAX_VALUE;
+        ArrayList<WaveElementWithPosition> lowestEntropyElements = new ArrayList<>();
+        double minEntropy = Integer.MAX_VALUE;
         for (int y = 0; y < this.waveElements.length; y++) {
             WaveElement[] row = this.waveElements[y];
             for (int x = 0; x < row.length; x++) {
                 WaveElement waveElement = row[x];
-                int entropy = waveElement.shannonEntropy();
+                double entropy = waveElement.shannonEntropy();
+                if (waveElement.getOptions().size() == 0) {
+                    return Optional.empty();
+                }
                 if (entropy != 0 && entropy < minEntropy) {
                     lowestEntropyElements.clear();
                     lowestEntropyElements.add(new WaveElementWithPosition(waveElement, x, y));

@@ -1,10 +1,12 @@
 package com.josephchotard;
 
-import java.util.Random;
+import java.util.Arrays;
 import java.util.Set;
 
+import static java.lang.Math.log;
+
 public class WaveElement {
-    private Set<String> options;
+    final private Set<String> options;
 
     public WaveElement(Set<String> options) {
         this.options = options;
@@ -14,35 +16,44 @@ public class WaveElement {
         return options;
     }
 
-    public int shannonEntropy() {
-        if (this.options.size() == 1) {
-            return 0;
-        }
-        return this.options.size();
-    }
-
-    public void removeOption(String option) {
-        this.options.remove(option);
+    public double shannonEntropy() {
+        double[] weights = this.options
+                .stream()
+                .map(opt -> ElementRulesCollection.getElementRules(opt).frequency())
+                .mapToDouble(x->x)
+                .toArray();
+        double sum = Arrays.stream(weights).sum();
+        return log(sum) - (Arrays.stream(weights).map(w -> w*log(w)).sum()/sum);
     }
 
     /**
      * @param availableOptions keep only the options that are also in availableOptions
      * @return whether or not the options changed
      */
-    public boolean keepPossible(Set availableOptions) {
+    public boolean keepPossible(Set<String> availableOptions) {
         int originalSize = this.options.size();
         this.options.retainAll(availableOptions);
         return originalSize != this.options.size();
     }
 
     /**
-     * Collapse the element to a random option
+     * Collapse the element to a random option weighted by the target frequency of each option
      */
     public void collapse() {
-        Random rand = new Random();
-//        Get random element from array, could also use iterator
-        String[] optionsArray = this.options.toArray(new String[this.options.size()]);
-        String collapseTo = optionsArray[rand.nextInt(optionsArray.length)];
+//        Get the total weight of all options combined
+        double totalWeight = this.options
+                .stream()
+                .mapToDouble(option -> ElementRulesCollection.getElementRules(option).frequency())
+                .sum();
+//      Convert set to array to keep track of index
+        String[] optionsArray = this.options.toArray(new String[0]);
+        int idx = 0;
+//      Randomly choose an element (weighted by frequency)
+        for (double r = Math.random() * totalWeight; idx < optionsArray.length - 1; ++idx) {
+            r -= ElementRulesCollection.getElementRules(optionsArray[idx]).frequency();
+            if (r <= 0.0) break;
+        }
+        String collapseTo = optionsArray[idx];
         this.options.clear();
         this.options.add(collapseTo);
     }

@@ -21,6 +21,7 @@ public class ElementRulesCollection {
 
 record ElementRules(
         String representation,
+        double frequency,
         Set<String> leftNeighbours,
         Set<String> topNeighbours,
         Set<String> rightNeighbours,
