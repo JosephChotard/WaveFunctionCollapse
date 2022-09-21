@@ -42,9 +42,9 @@ public class Wave {
 
         while (queue.size() != 0) {
             WaveElementWithPosition currentWaveElement = queue.poll();
-//            Iterates over the possible neigbours
+//            Iterates over the possible neighbours
             for (NeighbourOptions neighbourOption : this.getNeighbours(currentWaveElement.x(), currentWaveElement.y())) {
-//                Get the actual neigbour element
+//                Get the actual neighbour element
                 WaveElement neighbourElement = this.waveElements[neighbourOption.y()][neighbourOption.x()];
                 Set<String> possibleNeighbourOptions = currentWaveElement.waveElement().getOptions()
                         .stream()
@@ -125,7 +125,6 @@ public class Wave {
             }
             stringRepresentation.append(" ║\n");
         }
-        int length = stringRepresentation.length();
         stringRepresentation.append("╚").append(rowBarrier).append("╝\n");
         return stringRepresentation.toString();
     }

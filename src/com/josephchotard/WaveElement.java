@@ -5,12 +5,7 @@ import java.util.Set;
 
 import static java.lang.Math.log;
 
-public class WaveElement {
-    final private Set<String> options;
-
-    public WaveElement(Set<String> options) {
-        this.options = options;
-    }
+public record WaveElement(Set<String> options) {
 
     public Set<String> getOptions() {
         return options;
@@ -20,15 +15,15 @@ public class WaveElement {
         double[] weights = this.options
                 .stream()
                 .map(opt -> ElementRulesCollection.getElementRules(opt).frequency())
-                .mapToDouble(x->x)
+                .mapToDouble(x -> x)
                 .toArray();
         double sum = Arrays.stream(weights).sum();
-        return log(sum) - (Arrays.stream(weights).map(w -> w*log(w)).sum()/sum);
+        return log(sum) - (Arrays.stream(weights).map(w -> w * log(w)).sum() / sum);
     }
 
     /**
      * @param availableOptions keep only the options that are also in availableOptions
-     * @return whether or not the options changed
+     * @return whether the options changed
      */
     public boolean keepPossible(Set<String> availableOptions) {
         int originalSize = this.options.size();

@@ -88,7 +88,7 @@ public class Main {
         Wave wave = new Wave(
                 45,
                 25,
-                new String[]{"┫", "┣", " ", "┳", "┻", "╋"}
+                ElementRulesCollection.getElementIds().toArray(new String[0])
         );
 
 
