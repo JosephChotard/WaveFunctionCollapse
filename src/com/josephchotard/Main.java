@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-//        "┳", "┻"
 
         ElementRulesCollection.setElements(Map.of(
                 "┫", new ElementRules(
@@ -44,13 +43,35 @@ public class Main {
                                 .collect(Collectors.toCollection(HashSet::new)),
                         Stream.of("┳", " ")
                                 .collect(Collectors.toCollection(HashSet::new))
+                ),
+                "┳", new ElementRules(
+                        "┳",
+                        Stream.of("┻", "┳", "┣")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┻", " ")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┻", "┳", "┫")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┫", "┻", "┣")
+                                .collect(Collectors.toCollection(HashSet::new))
+                ),
+                "┻", new ElementRules(
+                        "┻",
+                        Stream.of("┻", "┳", "┣")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┳", "┣", "┫")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of("┻", "┳", "┫")
+                                .collect(Collectors.toCollection(HashSet::new)),
+                        Stream.of(" ", "┳")
+                                .collect(Collectors.toCollection(HashSet::new))
                 )
         ));
 
         Wave wave = new Wave(
-                10,
-                5,
-                new String[]{"┫", "┣", " "}
+                45,
+                25,
+                new String[]{"┫", "┣", " ", "┳", "┻"}
         );
 
 

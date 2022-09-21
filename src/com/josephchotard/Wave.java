@@ -78,8 +78,8 @@ public class Wave {
         return Stream.of(new NeighbourOptions[]{
                 new NeighbourOptions(x-1,y, option -> ElementRulesCollection.getElementRules(option).leftNeighbours()),
                 new NeighbourOptions(x+1,y, option -> ElementRulesCollection.getElementRules(option).rightNeighbours()),
-                new NeighbourOptions(x,y+1, option -> ElementRulesCollection.getElementRules(option).topNeighbours()),
-                new NeighbourOptions(x,y-1, option -> ElementRulesCollection.getElementRules(option).bottomNeighbours()),
+                new NeighbourOptions(x,y-1, option -> ElementRulesCollection.getElementRules(option).topNeighbours()),
+                new NeighbourOptions(x,y+1, option -> ElementRulesCollection.getElementRules(option).bottomNeighbours()),
         })
             .filter(no -> (no.x() >= 0 && no.x() < this.width && no.y() >= 0 && no.y() < this.height))
                 .toArray(NeighbourOptions[]::new);
@@ -113,12 +113,12 @@ public class Wave {
     public String toString() {
         StringBuilder stringRepresentation = new StringBuilder();
         stringRepresentation.append("Wave of size ").append(this.width).append("x").append(this.height).append(":\n");
-        String rowBarrier = "═".repeat(width*2+1);
+        String rowBarrier = "═".repeat(width+1);
         stringRepresentation.append("╔").append(rowBarrier).append("╗\n");
         for (WaveElement[] row: this.waveElements) {
             stringRepresentation.append("║");
             for (WaveElement element: row) {
-                stringRepresentation.append(" ").append(element);
+                stringRepresentation.append(element);
             }
             stringRepresentation.append(" ║\n");
         }
